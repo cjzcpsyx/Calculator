@@ -1,5 +1,6 @@
 import sys
 from Tkinter import *
+import math
 
 calculatorGUI = Tk()
 calculatorGUI.geometry("350x400+200+200")
@@ -57,6 +58,21 @@ def change_action_multiply():
 	return change_action('*')
 def change_action_divide():
 	return change_action('/')
+def change_action_power():
+	return change_action('^')
+def change_action_sqrt():
+	global num1, num2, action, result
+	global num1Label, num2Label, actionLabel, resultLabel, errorLabel
+	result = str(math.sqrt(float(num1)))
+	error_message = ''
+	num1 = num2 = '0'
+	action = ''
+	num1Label.config(text = num1)
+	num2Label.config(text = num2)
+	resultLabel.config(text = result)
+	actionLabel.config(text = action)
+	errorLabel.config(text = error_message)
+
 
 def change_action(act):
 	global action
@@ -65,32 +81,44 @@ def change_action(act):
 	actionLabel.config(text = action)
 
 def get_result():
-	global result
-	global resultLabel
-	global errorLabel
+	global num1, num2, action, result
+	global num1Label, num2Label, actionLabel, resultLabel, errorLabel
 	if action == '+':
 		result = str(float(num1) + float(num2))
+		error_message = ''
 	if action == '-':
 		result = str(float(num1) - float(num2))
+		error_message = ''
 	if action == '*':
 		result = str(float(num1) * float(num2))
+		error_message = ''
 	if action == '/':
 		if float(num2) == 0:
 			error_message = 'Cannot divide by zero!!!'
-			errorLabel.config(text = error_message)
 		else:
 			result = str(float(num1) / float(num2))
-	resultLabel.config(text = result)
-
-def clear():
-	global num1, num2, action, result
-	global num1Label, num2Label, actionLabel, resultLabel
-	num1 = num2 = result = '0'
+			error_message = ''
+	if action == '^':
+		result = str(float(num1) ** float(num2))
+		error_message = ''
+	num1 = num2 = '0'
 	action = ''
 	num1Label.config(text = num1)
 	num2Label.config(text = num2)
 	resultLabel.config(text = result)
 	actionLabel.config(text = action)
+	errorLabel.config(text = error_message)
+
+def clear():
+	global num1, num2, action, result
+	global num1Label, num2Label, actionLabel, resultLabel, errorLabel
+	num1 = num2 = result = '0'
+	action = error_message = ''
+	num1Label.config(text = num1)
+	num2Label.config(text = num2)
+	resultLabel.config(text = result)
+	actionLabel.config(text = action)
+	errorLabel.config(text = error_message)
 
 num1Label = Label(calculatorGUI, text = num1)
 actionLabel = Label(calculatorGUI, text = action)
@@ -119,6 +147,8 @@ button_plus = Button(calculatorGUI, width = 4, height = 3, text='+', command = c
 button_minus = Button(calculatorGUI, width = 4, text='-', command = change_action_minus)
 button_multiply = Button(calculatorGUI, width = 4, text='*', command = change_action_multiply)
 button_divide = Button(calculatorGUI, width = 4, text='/', command = change_action_divide)
+button_power = Button(calculatorGUI, width = 4, text='^', command = change_action_power)
+button_sqrt = Button(calculatorGUI, width = 4, text='sqrt', command = change_action_sqrt)
 button_decimal = Button(calculatorGUI, width = 4, text = '.', command = change_decimal)
 button_equal = Button(calculatorGUI, width = 4, height = 3, text='=', command = get_result)
 button_clear = Button(calculatorGUI, width = 4, text = 'C', command = clear)
@@ -138,6 +168,8 @@ button_minus.place(x=220, y=170)
 button_multiply.place(x=180, y=170)
 button_divide.place(x=140, y=170)
 button_decimal.place(x=180, y=290)
+button_power.place(x=60, y=170)
+button_sqrt.place(x=60, y=200)
 button_equal.place(x=220, y=260)
 button_clear.place(x=100, y=170)
 
