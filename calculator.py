@@ -4,7 +4,7 @@ from Tkinter import *
 calculatorGUI = Tk()
 calculatorGUI.geometry("350x400+200+200")
 calculatorGUI.title("Calculator V1.0")
-welcomLabel = Label(calculatorGUI, text='Welcome to calculator V1.0', fg='#447bd4').pack()
+welcomLabel = Label(calculatorGUI, text='Welcome to calculator V1.1', fg='#447bd4').pack()
 
 num1, num2, action, result = '0', '0', '', '0'
 point = False
