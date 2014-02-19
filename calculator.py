@@ -63,8 +63,11 @@ def change_action_power():
 def change_action_sqrt():
 	global num1, num2, action, result
 	global num1Label, num2Label, actionLabel, resultLabel, errorLabel
-	result = str(math.sqrt(float(num1)))
-	error_message = ''
+	if num1[0] == '-':
+		error_message = 'Cannot calculate the square root of a negative number!!!'
+	else:
+		result = str(math.sqrt(float(num1)))
+		error_message = ''
 	num1 = num2 = '0'
 	action = ''
 	num1Label.config(text = num1)
@@ -120,6 +123,26 @@ def clear():
 	actionLabel.config(text = action)
 	errorLabel.config(text = error_message)
 
+def change_sign():
+	global num1
+	global num2
+	global num1Label
+	global num2Label
+	if action == '':
+		if not num1 == '0':
+			if num1[0] == '-':
+				num1 = num1[1:]
+			else:
+				num1 = '-' + num1
+			num1Label.config(text = num1)
+	else:
+		if not num2 == '0':
+			if num2[0] == '-':
+				num2 = num2[1:]
+			else:
+				num2 = '-' + num2
+			num2Label.config(text = num2)
+
 num1Label = Label(calculatorGUI, text = num1)
 actionLabel = Label(calculatorGUI, text = action)
 num2Label = Label(calculatorGUI, text = num2)
@@ -152,6 +175,7 @@ button_sqrt = Button(calculatorGUI, width = 4, text='sqrt', command = change_act
 button_decimal = Button(calculatorGUI, width = 4, text = '.', command = change_decimal)
 button_equal = Button(calculatorGUI, width = 4, height = 3, text='=', command = get_result)
 button_clear = Button(calculatorGUI, width = 4, text = 'C', command = clear)
+button_changesigh = Button(calculatorGUI, width = 4, text  = '+/-', command = change_sign)
 
 button1.place(x=100, y=260)
 button2.place(x=140, y=260)
@@ -172,6 +196,7 @@ button_power.place(x=60, y=170)
 button_sqrt.place(x=60, y=200)
 button_equal.place(x=220, y=260)
 button_clear.place(x=100, y=170)
+button_changesigh.place(x=60, y=230)
 
 
 
