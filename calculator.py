@@ -65,6 +65,7 @@ def change_action_sqrt():
 	global num1Label, num2Label, actionLabel, resultLabel, errorLabel
 	if num1[0] == '-':
 		error_message = 'Cannot calculate the square root of a negative number!!!'
+		result = '0'
 	else:
 		result = str(math.sqrt(float(num1)))
 		error_message = ''
@@ -98,6 +99,7 @@ def get_result():
 	if action == '/':
 		if float(num2) == 0:
 			error_message = 'Cannot divide by zero!!!'
+			result = '0'
 		else:
 			result = str(float(num1) / float(num2))
 			error_message = ''
